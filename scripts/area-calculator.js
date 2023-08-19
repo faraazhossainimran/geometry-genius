@@ -24,33 +24,45 @@ function calculateTriangleArea(){
 function calculateRectangleArea(){
     const rectangleWidth = getInputValue('rectangle-width');
     const rectangleHeight = getInputValue('rectangle-length')
-    const rectangle = rectangleWidth * rectangleHeight;
+    
     // show rectangle area old way
     // const rectangleAreaId = document.getElementById('rectangle-area')
     // rectangleAreaId.innerText = rectangle;
-
+    if(isNaN(rectangleWidth) || isNaN(rectangleHeight)){
+        alert("please insert a number");
+        return;
+    }
+    const rectangle = rectangleWidth * rectangleHeight;
     // show rectangle area using resueable funciton
     setElementInnerText('rectangle-area', rectangle)
+
 }
 
 // Calculate Parallelogram
 function calculateParallelogramArea(){
-    const ParallelogramBase = getInputValue('parallelogram-base');
-    const ParallelogramHeight = getInputValue('parallelogram-height')
-    const Parallelogram = ParallelogramBase * ParallelogramHeight;
+    const parallelogramBase = getInputValue('parallelogram-base');
+    const parallelogramHeight = getInputValue('parallelogram-height')
+    const parallelogram = parallelogramBase * parallelogramHeight;
 
     // show Pralleloram area old way
     // const ParallelogramAreaId = document.getElementById('parallelogram-area')
     // ParallelogramAreaId.innerText = Parallelogram;
 
     // show Pralleloram area new way
-    setElementInnerText('parallelogram-area', Parallelogram)
+    setElementInnerText('parallelogram-area', parallelogram);
+    addToCalculationEntry('Parallelogram', parallelogram);
 }
 
 // add to calculation entry 
-function addToCalculationEntry (){
-    const calculationEntryId = getInputValue('calculation-entry');
-    console.log(calculationEntryId);
+function addToCalculationEntry (areaType, area){
+   const calculationEntry = document.getElementById('calculation-entry');
+    // add serial number
+    const count = calculationEntry.childElementCount;
+
+   const p = document.createElement('p');
+   p.innerHTML = `${count + 1}. ${areaType} ${area} cm<sup>2</sup> <button class="btn m-2 btn-sm btn-success">Convert</button>`;
+   calculationEntry.appendChild(p);
+   
 }
 
 // reuseable function for input 
